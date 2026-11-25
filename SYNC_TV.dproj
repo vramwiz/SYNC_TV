@@ -1,4 +1,4 @@
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{4CFF6959-966F-42F0-AF3A-5C39765C7E58}</ProjectGuid>
         <ProjectVersion>20.4</ProjectVersion>
@@ -83,7 +83,7 @@
         <Manifest_File>(なし)</Manifest_File>
         <AppDPIAwarenessMode>none</AppDPIAwarenessMode>
         <DCC_ExeOutput>C:\ProgramData\aviutl2\Plugin\SYNC_TV\</DCC_ExeOutput>
-        <Debugger_HostApplication>D:\aviutl2_v2.1.16\aviutl2.exe</Debugger_HostApplication>
+        <Debugger_HostApplication>D:\aviutl2_v2.1.17\aviutl2.exe</Debugger_HostApplication>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
@@ -141,7 +141,7 @@
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent><![CDATA[copy /Y "$(OUTPUTDIR)$(PROJECTNAME).dll" "$(OUTPUTDIR)$(PROJECTNAME).auf2" && del /Q "$(OUTPUTDIR)$(PROJECTNAME).dll"]]></PostBuildEvent>
+        <PostBuildEvent>copy /Y &quot;$(OUTPUTDIR)$(PROJECTNAME).dll&quot; &quot;$(OUTPUTDIR)$(PROJECTNAME).auf2&quot; &amp;&amp; del /Q &quot;$(OUTPUTDIR)$(PROJECTNAME).dll&quot;</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
         <PostBuildEventExecuteWhen>Always</PostBuildEventExecuteWhen>
     </PropertyGroup>
@@ -150,7 +150,7 @@
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent><![CDATA[copy /Y "$(OUTPUTDIR)$(PROJECTNAME).dll" "$(OUTPUTDIR)$(PROJECTNAME).auf2" && del /Q "$(OUTPUTDIR)$(PROJECTNAME).dll" && (if exist "$(OUTPUTDIR)$(PROJECTNAME).rsm" del /Q "$(OUTPUTDIR)$(PROJECTNAME).rsm")]]></PostBuildEvent>
+        <PostBuildEvent>copy /Y &quot;$(OUTPUTDIR)$(PROJECTNAME).dll&quot; &quot;$(OUTPUTDIR)$(PROJECTNAME).auf2&quot; &amp;&amp; del /Q &quot;$(OUTPUTDIR)$(PROJECTNAME).dll&quot; &amp;&amp; (if exist &quot;$(OUTPUTDIR)$(PROJECTNAME).rsm&quot; del /Q &quot;$(OUTPUTDIR)$(PROJECTNAME).rsm&quot;)</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
         <PostBuildEventExecuteWhen>Always</PostBuildEventExecuteWhen>
     </PropertyGroup>
