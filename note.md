@@ -98,3 +98,9 @@ cmd /c 'call "C:\Program Files (x86)\Embarcadero\Studio\37.0\bin\rsvars.bat" && 
 - カタログの配布元は `vramwiz/SYNC_TV` を想定した。インストールは `{tmp}/SYNC_TV` を `{pluginsDir}/SYNC_TV` にコピーし、アンインストールは同じフォルダーへの1件の `delete` とした。隔離環境で隣接プラグインと展開済みソースを残して対象フォルダーだけ削除できた。バッチはプラグイン親フォルダーを削除しようとする設定を拒否した。[カタログ v0.3.3 のフォルダー削除処理](https://github.com/Neosku/aviutl2-catalog/blob/v0.3.3/src/utils/installer/fs-ops.ts)
 - Win64 Debug / Release は警告0・エラー0。配置済みReleaseとZIP内のAUF2が一致し、両構成とZIP内の対応ソースから再ビルドした版の描画フレームも一致した。
 - ZIP SHA-256 `CBA651C05A47088064E335B34DE147F5A348522F46D0D9FB36209EDBB5AC228D`。AUF2 XXH3-128 `ba17fe77e613f095ef18a7f6b8d627a1`。
+
+## AviUtl2カタログ登録時の共通ルール
+
+1. **概要は35文字以内。** `Setup/*.catalog.json` の `summary` は、JSONのエスケープ表記ではなく実際の表示文字列を数える。機能の詳細や補足は概要に詰め込まず、説明・READMEに記載する。
+2. **既存タグを優先する。** [公開カタログの `index.json`](https://github.com/Neosku/aviutl2-catalog-data/blob/main/index.json) で、同じ製品や近い用途に使われているタグの表記を確認し、用途を表すものだけを選ぶ。同義語を重ねたり、製品ごとに新しいタグを量産したりしない。
+3. **配布専用フォルダー単位で導入・削除する。** ZIP内を製品専用フォルダーにまとめ、ダウンロード・展開後の配置はフォルダーの `copy` 1件、アンインストールはその専用フォルダーだけを指定する `delete` 1件を基本とする。共有フォルダーや、ユーザー素材・設定を含むフォルダーは一括削除しない。既存パッケージで変更する際は、配布ZIPの配置とセットアップスクリプトの検証条件も確認し、整合しない場合は既存の手順を維持する。

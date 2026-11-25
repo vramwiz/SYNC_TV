@@ -3,7 +3,7 @@
         "id":  "VRAMWIZ.SYNC_TV",
         "name":  "テレビ演出",
         "type":  "フィルタプラグイン",
-        "summary":  "ニュース・天気予報・スポーツ中継など11種類の架空のテレビ番組を生成。チャンネル切替、液晶の反射、画面の四隅補正に対応。",
+        "summary":  "11種類の架空のテレビ番組を生成し、チャンネル切替を演出",
         "description":  "https://raw.githubusercontent.com/vramwiz/SYNC_TV/main/README.md",
         "author":  "VRAMの魔術師",
         "repoURL":  "https://github.com/vramwiz/SYNC_TV/",
