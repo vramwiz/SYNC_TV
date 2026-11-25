@@ -62,12 +62,9 @@ try {
         throw 'Installation must download, extract, and copy the single SYNC_TV directory.'
     }
     $uninstall = @($entry.installer.uninstall)
-    $packagedFiles = @("$packageName.auf2", 'README.md', 'LICENSE', 'THIRD_PARTY_NOTICES.md', 'ThirdParty/LICENSE.AviUtl2-SDK.txt', 'Sample/TV_Programs.png')
-    $expectedPaths = @($packagedFiles | ForEach-Object { "{pluginsDir}/$packageName/$_" })
-    $deletePaths = @($uninstall | Where-Object action -ceq 'delete' | ForEach-Object path)
-    if ($uninstall.Count -ne $expectedPaths.Count -or $deletePaths.Count -ne $expectedPaths.Count -or
-        @(Compare-Object $expectedPaths $deletePaths -CaseSensitive).Count -ne 0) {
-        throw 'The catalog uninstall paths must list every installed file exactly once.'
+    if ($uninstall.Count -ne 1 -or $uninstall[0].action -cne 'delete' -or
+        $uninstall[0].path -cne $installPath) {
+        throw 'Uninstallation must delete only the installed SYNC_TV directory in one step.'
     }
     $versions = @($entry.version)
     if ($versions.Count -eq 0 -or $versions[0].version -cne 'v1.0.0') {
