@@ -78,11 +78,11 @@
         "version":  [
                         {
                             "version":  "v1.0.0",
-                            "release_date":  "2026-11-24",
+                            "release_date":  "2026-11-25",
                             "file":  [
                                          {
                                              "path":  "{pluginsDir}/SYNC_TV/SYNC_TV.auf2",
-                                             "XXH3_128":  "ba17fe77e613f095ef18a7f6b8d627a1"
+                                             "XXH3_128":  "07d70e3ce972f191c608f9e38f0aa790"
                                          }
                                      ]
                         }
