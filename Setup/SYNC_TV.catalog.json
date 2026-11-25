@@ -4,7 +4,7 @@
         "name":  "テレビ演出",
         "type":  "フィルタプラグイン",
         "summary":  "ニュース・天気予報・スポーツ中継など11種類の架空のテレビ番組を生成。チャンネル切替、液晶の反射、画面の四隅補正に対応。",
-        "description":  "https://raw.githubusercontent.com/vramwiz/SYNC_TV/main/README.md",
+        "description":  "https://raw.githubusercontent.com/vramwiz/SYNC_TV/refs/heads/main/README.md",
         "author":  "VRAMの魔術師",
         "repoURL":  "https://github.com/vramwiz/SYNC_TV/",
         "latest-version":  "v1.0.0",
@@ -49,6 +49,7 @@
                    ],
         "installer":  {
                           "source":  {
+                                         "direct":  null,
                                          "github":  {
                                                         "owner":  "vramwiz",
                                                         "repo":  "SYNC_TV",
@@ -69,11 +70,31 @@
                                           }
                                       ],
                           "uninstall":  [
-                                            {
-                                                "action":  "delete",
-                                                "path":  "{pluginsDir}/SYNC_TV"
-                                            }
-                                        ]
+                              {
+                                  "action":  "delete",
+                                  "path":  "{pluginsDir}/SYNC_TV/SYNC_TV.auf2"
+                              },
+                              {
+                                  "action":  "delete",
+                                  "path":  "{pluginsDir}/SYNC_TV/README.md"
+                              },
+                              {
+                                  "action":  "delete",
+                                  "path":  "{pluginsDir}/SYNC_TV/LICENSE"
+                              },
+                              {
+                                  "action":  "delete",
+                                  "path":  "{pluginsDir}/SYNC_TV/THIRD_PARTY_NOTICES.md"
+                              },
+                              {
+                                  "action":  "delete",
+                                  "path":  "{pluginsDir}/SYNC_TV/ThirdParty/LICENSE.AviUtl2-SDK.txt"
+                              },
+                              {
+                                  "action":  "delete",
+                                  "path":  "{pluginsDir}/SYNC_TV/Sample/TV_Programs.png"
+                              }
+                          ]
                       },
         "version":  [
                         {

@@ -22,5 +22,5 @@ Setup\make_release_zip.bat -ReleaseDirectory "D:\Release\SYNC_TV" -XxhsumPath "D
 
 - `SYNC_TV.zip` の `SYNC_TV` フォルダーにAUF2、README、サンプル画像、GPL・MITのライセンス情報を収録します。
 - 同じZIPの `SYNC_TV-source` フォルダーに対応ソースと Delphi プロジェクトを収録します。AviUtl2へ配置するのは `SYNC_TV` フォルダーです。
-- `SYNC_TV.catalog.json` は `v1.0.0` を登録します。展開後の `{tmp}/SYNC_TV` を `{pluginsDir}/SYNC_TV` へ1回でコピーし、アンインストールも同じインストール先フォルダーを1件の `delete` で削除します。
+- `SYNC_TV.catalog.json` は `v1.0.0` を登録します。展開後の `{tmp}/SYNC_TV` を `{pluginsDir}/SYNC_TV` へ1回でコピーします。アンインストールでは ZIP からインストールしたファイルのみを個別に削除します。
 - カタログの配布元には `vramwiz/SYNC_TV` の GitHub Releases を指定しています。公開するときはリリースのタグとカタログのバージョンを合わせ、実際の公開日に `release_date` を設定してください。
