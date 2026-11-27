@@ -97,6 +97,13 @@
         <DCCReference Include="Source\Common\TV_Studio.pas"/>
         <DCCReference Include="Source\Common\TV_Sports.pas"/>
         <DCCReference Include="Source\Common\TV_Entertainment.pas"/>
+        <DCCReference Include="Source\Common\TV_GameArt.pas"/>
+        <DCCReference Include="Source\Common\TV_GameArcade.pas"/>
+        <DCCReference Include="Source\Common\TV_GameBattle.pas"/>
+        <DCCReference Include="Source\Common\TV_GamePuzzle.pas"/>
+        <DCCReference Include="Source\Common\TV_GameRacing.pas"/>
+        <DCCReference Include="Source\Common\TV_GameDungeon.pas"/>
+        <DCCReference Include="Source\Common\TV_GameWorld.pas"/>
         <DCCReference Include="Source\Common\TV_Programs.pas"/>
         <DCCReference Include="Source\Common\TV_Screen.pas"/>
         <DCCReference Include="Source\Plugin\Filter\TV_Parameters.pas"/>

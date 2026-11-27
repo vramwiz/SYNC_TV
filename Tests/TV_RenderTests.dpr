@@ -98,6 +98,8 @@ begin
     1: if Frame<120 then Result := 0 else Result := 2;
     2: if Frame<120 then Result := 2 else Result := 0;
     3: if Frame<120 then Result := 10 else Result := 2;
+    4: if Frame<120 then Result := 10 else Result := 24;
+    5: if Frame<120 then Result := 24 else Result := 0;
   else
     Result := 10;
   end;
@@ -197,7 +199,19 @@ begin
   Near := Render(2,26);
   Require((First.Center.G<Near.Center.G) and (Near.Center.G<Render(2,35).Center.G),'Channel blank');
   Require(Render(2,20).Digest=First.Digest,'Channel rewind');
+  Timeline := 4;
+  First := Render(24,20);
+  Require(LastLookup=119,'Game switch uses channel history');
+  EndFrame := Render(24,35);
   Timeline := 0;
+  Require(First.Digest=Render(0,20).Digest,'Game channel starts with a black screen');
+  Require(EndFrame.Digest=Render(24,35).Digest,'Game channel reaches full brightness');
+  Timeline := 5;
+  First := Render(0,20);
+  EndFrame := Render(0,35);
+  Timeline := 0;
+  Require(First.Digest=Render(24,20).Digest,'Game image persists at the start of power-off');
+  Require(EndFrame.Digest=Render(0,35).Digest,'Game channel powers off');
 end;
 
 procedure CheckGeometry(const PreviewDir: string);
@@ -262,13 +276,13 @@ var
 begin
   Digests := TStringList.Create;
   try
-    for Channel := 0 to 20 do
+    for Channel := 0 to 30 do
     begin
       Near := Render(Channel,Frames[0]);
       for Index := 1 to High(Frames) do
       begin
         Later := Render(Channel,Frames[Index]);
-        if (Channel in [1,3..20]) then
+        if (Channel in [1,3..30]) then
           Require(Near.Digest<>Later.Digest,'Program has no motion '+IntToStr(Channel));
       end;
       Rewind := Render(Channel,Frames[0]);
@@ -287,7 +301,8 @@ begin
       end;
     end;
     Near := Render(999,1080131);
-    Require(Near.Center.A=255,'Unassigned channel falls back safely');
+    Require((Near.Center.A=255) and (Render(31,1080131).Digest=Near.Digest) and
+      (Render(4,1080131).Digest=Near.Digest),'Unassigned channel falls back safely');
     OriginalSession := Video.UserData;
     AdditionalSession := Table^.Func_Create(37);
     Require(AdditionalSession<>nil,'Cannot create second TV instance');
@@ -318,6 +333,39 @@ begin
   finally
     Digests.Free;
   end;
+end;
+
+procedure CheckGameFrames;
+var
+  Channel: Integer;
+  Original, Later, Warped: TFrame;
+begin
+  for Channel := 21 to 30 do
+  begin
+    Original := Render(Channel,141);
+    Require(Render(Channel,141).Digest=Original.Digest,'Same game frame changed while paused');
+    Later := Render(Channel,140987);
+    Require(Later.Digest<>Original.Digest,'Game state did not advance');
+    Require(Render(Channel,141).Digest=Original.Digest,'Game seek changed the first frame');
+  end;
+  Scene.Rate := 1;
+  for Channel := 21 to 30 do
+    Require(Render(Channel,1000000000).Center.A=255,'Game fails at the upper time bound');
+  Scene.Rate := 30;
+  Track('角丸')^.Value := 75;
+  Track('縦横比')^.Value := -75;
+  Track('周囲の明るさ')^.Value := 100;
+  Original := Render(28,86);
+  Require((Original.Width=960) and (Original.Height=240) and (Original.Pixels[0].A=0),
+    'Game video follows TV aspect and rounded corners');
+  Track('左上Y')^.Value := 75;
+  Warped := Render(28,86);
+  Require((Warped.Digest<>Original.Digest) and (Warped.Pixels[0].A=0),
+    'Game video follows corner correction');
+  Track('左上Y')^.Value := 0;
+  Track('角丸')^.Value := 0;
+  Track('縦横比')^.Value := -43.75;
+  Track('周囲の明るさ')^.Value := 50;
 end;
 
 procedure Run;
@@ -370,6 +418,7 @@ begin
     try
       CheckPrograms(PreviewDir);
       CheckGeometry(PreviewDir);
+      CheckGameFrames;
       Video.Edit := @Edit;
       CheckTimeline;
     finally

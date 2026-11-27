@@ -106,7 +106,7 @@ begin
   if not TableReady then
   begin
     SetupPluginTable(FILTER_FLAG_VIDEO or FILTER_FLAG_INPUT or FILTER_FLAG_USERDATA,
-      'テレビ演出','SYNC','テレビ演出 / SYNC_TV v1.0.0',TVProcVideo,nil);
+      'テレビ演出','SYNC','テレビ演出 / SYNC_TV v1.0.1',TVProcVideo,nil);
     RegisterTVParameters;
     GetPluginTable^.Func_Create := TVCreate;
     GetPluginTable^.Func_Destroy := TVDestroy;

@@ -109,7 +109,7 @@ try {
     }
 
     $shared = @('README.md', 'LICENSE', 'THIRD_PARTY_NOTICES.md',
-        'ThirdParty/LICENSE.AviUtl2-SDK.txt', 'Sample/TV_Programs.png')
+        'ThirdParty/LICENSE.AviUtl2-SDK.txt', 'Sample/TV_Programs.png', 'Sample/TV_Games.png')
     $archiveFiles = [ordered]@{}
     $archiveFiles["$packageName/$pluginName"] = $tempPlugin
     $sourcePackage = "$packageName-source"

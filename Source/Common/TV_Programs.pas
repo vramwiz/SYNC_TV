@@ -2,7 +2,7 @@
 
 // Copyright (c) 2026 VRAMの魔術師
 // SPDX-License-Identifier: GPL-3.0-only
-// チャンネル番号から番組と特殊表示を選び、透過処理前の番組映像を生成する。
+// チャンネル番号から番組・ゲーム・特殊表示を選び、透過処理前の映像を生成する。
 
 interface
 
@@ -15,7 +15,8 @@ implementation
 
 uses
   System.Math, System.SysUtils, TV_Timeline, TV_Artwork, TV_Studio, TV_Sports,
-  TV_Entertainment;
+  TV_Entertainment, TV_GameArcade, TV_GameBattle, TV_GamePuzzle, TV_GameRacing,
+  TV_GameDungeon, TV_GameWorld;
 
 type
   TDrawProgram = procedure(Canvas: TTVCanvas; Time: Double);
@@ -24,6 +25,9 @@ const
   Programs: array[10..20] of TDrawProgram = (DrawNews,DrawForecast,DrawBaseball,
     DrawFootball,DrawVariety,DrawMusic,DrawAnimation,DrawCooking,DrawShopping,
     DrawDrama,DrawCommercial);
+  Games: array[21..30] of TDrawProgram = (DrawPlatformGame,DrawShooterGame,
+    DrawFightingGame,DrawRacingGame,DrawRolePlayingGame,DrawFallingGame,DrawRhythmGame,
+    DrawDungeonGame,DrawBreakoutGame,DrawWorldGame);
 
 procedure DrawStatic(Canvas: TTVCanvas; Time: Double);
 var
@@ -92,6 +96,8 @@ begin
   try
     if (Channel >= Low(Programs)) and (Channel <= High(Programs)) then
       Programs[Channel](Canvas,Time)
+    else if (Channel>=Low(Games)) and (Channel<=High(Games)) then
+      Games[Channel](Canvas,Time)
     else
       case Channel of
         0: Canvas.Clear($000000);
